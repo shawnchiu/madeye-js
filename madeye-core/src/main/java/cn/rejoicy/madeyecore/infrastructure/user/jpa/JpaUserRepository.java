@@ -17,4 +17,20 @@ public interface JpaUserRepository extends JpaRepository<User, Long> {
      * @param userCode
      */
     void deleteByUserCode(String userCode);
+
+    /**
+     * 根据用户名查询用户信息
+     *
+     * @param userName
+     * @return
+     */
+    User findByUserName(String userName);
+
+    /**
+     * 根据用户编码查询用户信息
+     *
+     * @param userCode
+     * @return
+     */
+    User findByUserCode(String userCode);
 }

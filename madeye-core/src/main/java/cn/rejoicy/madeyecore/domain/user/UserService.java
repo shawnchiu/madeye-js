@@ -14,11 +14,21 @@ public interface UserService {
      * @param userName
      * @param password
      */
-    void register(String userName, String password);
+    void register(String userName, String password) throws Exception;
+
+    /**
+     * 修改用户密码
+     *
+     * @param userCode
+     * @param password
+     * @param newPassword
+     */
+    void passwordModify(String userCode, String password, String newPassword) throws Exception;
 
     /**
      * 删除用户
-     * @param userId 用户ID
+     *
+     * @param userCode 用户编码
      */
-    void delete(Long userId);
+    void delete(String userCode) throws Exception;
 }

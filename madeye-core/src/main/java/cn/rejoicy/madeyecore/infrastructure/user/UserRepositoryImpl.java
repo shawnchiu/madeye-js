@@ -23,4 +23,14 @@ public class UserRepositoryImpl implements UserRepository {
     public void delete(String userCode) {
         jpaUserRepository.deleteByUserCode(userCode);
     }
+
+    @Override
+    public User findByUserName(String userName) {
+        return jpaUserRepository.findByUserName(userName);
+    }
+
+    @Override
+    public User findByUserCode(String userCode) {
+        return jpaUserRepository.findByUserCode(userCode);
+    }
 }

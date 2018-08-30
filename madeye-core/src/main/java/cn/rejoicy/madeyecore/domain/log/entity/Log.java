@@ -2,6 +2,7 @@ package cn.rejoicy.madeyecore.domain.log.entity;
 
 import cn.rejoicy.madeyecore.base.entity.BaseEntity;
 import cn.rejoicy.madeyecore.domain.business.entity.Business;
+import cn.rejoicy.madeyecore.domain.log.enums.LogLevelEnum;
 
 import javax.persistence.*;
 
