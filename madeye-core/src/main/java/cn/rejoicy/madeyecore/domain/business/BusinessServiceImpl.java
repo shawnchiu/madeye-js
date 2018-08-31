@@ -3,13 +3,23 @@ package cn.rejoicy.madeyecore.domain.business;
 import cn.rejoicy.madeyecore.base.conveter.BusinessConverter;
 import cn.rejoicy.madeyecore.domain.business.entity.Business;
 import cn.rejoicy.madeyecore.domain.business.enums.BusinessStatusEnum;
+import cn.rejoicy.madeyecore.domain.user.entity.User;
 import cn.rejoicy.madeyecore.infrastructure.business.BusinessRepository;
 import cn.rejoicy.madeyecore.viewmodel.BusinessDTO;
+import cn.rejoicy.madeyecore.viewmodel.ConditionQueryBusiness;
 import com.sun.istack.internal.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -72,4 +82,30 @@ public class BusinessServiceImpl implements BusinessService {
     public Business findByApiToken(@NotNull String apiToken) {
         return businessRepository.findByApiToken(apiToken);
     }
+
+    @Override
+    public Page<Business> findByCondition(ConditionQueryBusiness condition) {
+        Sort sort = new Sort(Sort.Direction.DESC, "_id");
+        Pageable pageable = new PageRequest(condition.getPage() - 1, condition.getPageSize(), sort);
+
+        return businessRepository.findByCondition((root, query, cb) -> getFullQueryPredicate(condition, root, cb), pageable);
+    }
+
+
+    private Predicate getFullQueryPredicate(ConditionQueryBusiness condition, Root<Business> root, CriteriaBuilder cb) {
+        Predicate predicate = cb.conjunction();
+        List<Expression<Boolean>> expressions = predicate.getExpressions();
+        SetJoin<Business, User> userJoin = root.joinSet("users", JoinType.LEFT);
+
+        if (!StringUtils.isEmpty(condition.getBusinessName())) {
+            expressions.add(cb.equal(root.<String>get("businessName"), condition.getBusinessName()));
+        }
+        if (!StringUtils.isEmpty(condition.getUserCode())) {
+            expressions.add(userJoin.get("userCode").in(condition.getUserCode()));
+        }
+
+        expressions.add(cb.equal(root.<BusinessStatusEnum>get("status"), BusinessStatusEnum.AVAILABLE));
+        return predicate;
+    }
+
 }

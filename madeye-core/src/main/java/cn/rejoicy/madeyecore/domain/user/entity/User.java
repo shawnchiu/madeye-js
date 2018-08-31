@@ -1,11 +1,13 @@
 package cn.rejoicy.madeyecore.domain.user.entity;
 
 import cn.rejoicy.madeyecore.base.entity.BaseEntity;
+import cn.rejoicy.madeyecore.domain.business.entity.Business;
 import cn.rejoicy.madeyecore.domain.user.enums.UserTypeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -39,6 +41,7 @@ public class User extends BaseEntity {
     /**
      * 密码
      */
+    // TODO: 2018/8/31 数据库中加密
     @Column(length = 256, nullable = false)
     private String password;
 
@@ -59,6 +62,9 @@ public class User extends BaseEntity {
      */
     @Enumerated(EnumType.STRING)
     private UserTypeEnum userType;
+
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    private List<Business> businesses;
 
     public Long getId() {
         return id;
@@ -114,5 +120,13 @@ public class User extends BaseEntity {
 
     public void setUserType(UserTypeEnum userType) {
         this.userType = userType;
+    }
+
+    public List<Business> getBusinesses() {
+        return businesses;
+    }
+
+    public void setBusinesses(List<Business> businesses) {
+        this.businesses = businesses;
     }
 }

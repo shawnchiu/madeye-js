@@ -2,8 +2,10 @@ package cn.rejoicy.madeyecore.domain.business.entity;
 
 import cn.rejoicy.madeyecore.base.entity.BaseEntity;
 import cn.rejoicy.madeyecore.domain.business.enums.BusinessStatusEnum;
+import cn.rejoicy.madeyecore.domain.user.entity.User;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * 业务实体
@@ -44,6 +46,13 @@ public class Business extends BaseEntity {
     @Column(length = 128, unique = true, updatable = false)
     private String apiToken;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "tb_user_business",
+            joinColumns = @JoinColumn(name = "user_code"),
+            inverseJoinColumns = @JoinColumn(name = "business_code")
+    )
+    private List<User> users;
+
     public Long getId() {
         return id;
     }
@@ -82,5 +91,13 @@ public class Business extends BaseEntity {
 
     public void setApiToken(String apiToken) {
         this.apiToken = apiToken;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
