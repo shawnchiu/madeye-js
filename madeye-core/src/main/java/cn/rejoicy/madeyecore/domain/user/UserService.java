@@ -1,5 +1,7 @@
 package cn.rejoicy.madeyecore.domain.user;
 
+import cn.rejoicy.madeyecore.domain.user.entity.User;
+
 /**
  * 用户操作类
  *
@@ -31,4 +33,12 @@ public interface UserService {
      * @param userCode 用户编码
      */
     void delete(String userCode) throws Exception;
+
+    /**
+     * 根据用户名查询用户
+     *
+     * @param userName
+     * @return
+     */
+    User findByUserName(String userName);
 }

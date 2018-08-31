@@ -3,12 +3,15 @@ package cn.rejoicy.madeyecore;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 /**
- * 核心代码
+ * core application
+ * @author shawn
  */
 @SpringBootApplication
 public class CoreApplication {
 
+    // TODO: 2018/8/31 封装exception 
     public static void main(String[] args) {
         SpringApplication.run(CoreApplication.class, args);
     }

@@ -23,17 +23,26 @@ public class Business extends BaseEntity {
     /**
      * 业务编码
      */
+    @Column(length = 32, unique = true, updatable = false)
     private String businessCode;
 
     /**
      * 业务名称
      */
+    @Column(length = 50)
     private String businessName;
 
     /**
      * 业务状态
      */
+    @Enumerated(EnumType.STRING)
     private BusinessStatusEnum status;
+
+    /**
+     * 提交日志所需的token
+     */
+    @Column(length = 128, unique = true, updatable = false)
+    private String apiToken;
 
     public Long getId() {
         return id;
@@ -65,5 +74,13 @@ public class Business extends BaseEntity {
 
     public void setStatus(BusinessStatusEnum status) {
         this.status = status;
+    }
+
+    public String getApiToken() {
+        return apiToken;
+    }
+
+    public void setApiToken(String apiToken) {
+        this.apiToken = apiToken;
     }
 }

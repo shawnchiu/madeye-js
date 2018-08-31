@@ -10,7 +10,8 @@ import java.util.Date;
  * @author shawnchiu
  * @date 2018/8/30
  */
-public class BaseEntity implements Serializable {
+@MappedSuperclass
+public abstract class BaseEntity implements Serializable {
 
     /**
      * 创建时间

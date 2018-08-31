@@ -1,16 +1,41 @@
 package cn.rejoicy.madeyecore.application.user;
 
+import cn.rejoicy.madeyecore.base.conveter.UserConverter;
 import cn.rejoicy.madeyecore.domain.user.UserService;
+import cn.rejoicy.madeyecore.domain.user.entity.User;
+import cn.rejoicy.madeyecore.viewmodel.LoginInfo;
+import cn.rejoicy.madeyecore.viewmodel.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+/**
+ * @author shawn
+ */
 @Service
-public class UserApplication {
+public class UserManager {
 
+
+    private final UserService userService;
 
     @Autowired
-    private UserService userService;
+    public UserManager(UserService userService) {
+        this.userService = userService;
+    }
+
+    /**
+     * 根据用户名查询
+     * @param userName
+     * @return
+     * @throws Exception
+     */
+    public UserDTO findByUserName(String userName) throws Exception {
+        User user = userService.findByUserName(userName);
+        if (user == null) {
+            throw new Exception("用户不存在");
+        }
+        return UserConverter.getUserConverter().convert(user);
+    }
 
 
     /**
@@ -65,6 +90,18 @@ public class UserApplication {
      */
     public void delete(String userCode) throws Exception {
         userService.delete(userCode);
+    }
+
+
+    /**
+     * 用户登陆
+     *
+     * @param userName
+     * @param password
+     * @return
+     */
+    public LoginInfo doLogin(String userName, String password) {
+        return new LoginInfo();
     }
 
 

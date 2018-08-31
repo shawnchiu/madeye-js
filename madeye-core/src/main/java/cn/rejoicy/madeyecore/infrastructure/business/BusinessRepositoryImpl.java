@@ -3,6 +3,9 @@ package cn.rejoicy.madeyecore.infrastructure.business;
 import cn.rejoicy.madeyecore.domain.business.entity.Business;
 import cn.rejoicy.madeyecore.infrastructure.business.jpa.JpaBusinessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,18 +13,43 @@ import org.springframework.stereotype.Repository;
  * @date 2018/8/30
  */
 @Repository
-public class BusinessRepositoryImpl  implements BusinessRepository{
+public class BusinessRepositoryImpl implements BusinessRepository {
+
+    private final JpaBusinessRepository jpaBusinessRepository;
 
     @Autowired
-    private JpaBusinessRepository jpaBusinessRepository;
+    public BusinessRepositoryImpl(JpaBusinessRepository jpaBusinessRepository) {
+        this.jpaBusinessRepository = jpaBusinessRepository;
+    }
 
     @Override
-    public Business save(Business business) {
-        return jpaBusinessRepository.save(business);
+    public void save(Business business) {
+        jpaBusinessRepository.save(business);
     }
 
     @Override
     public void delete(Business business) {
         jpaBusinessRepository.delete(business);
     }
+
+    @Override
+    public Business findByBusinessCode(String businessCode) {
+        return jpaBusinessRepository.findByBusinessCode(businessCode);
+    }
+
+    @Override
+    public Business findByBusinessName(String businessName) {
+        return jpaBusinessRepository.findOneByBusinessName(businessName);
+    }
+
+    @Override
+    public Business findByApiToken(String apiToken) {
+        return jpaBusinessRepository.findOneByApiToken(apiToken);
+    }
+
+    @Override
+    public Page<Business> findByCondition(Specification<Business> specification, Pageable pageable) {
+        return jpaBusinessRepository.findAll(specification, pageable);
+    }
+
 }

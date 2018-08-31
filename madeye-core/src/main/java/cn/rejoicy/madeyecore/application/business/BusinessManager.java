@@ -20,7 +20,7 @@ public class BusinessManager {
      *
      * @param businessDTO
      */
-    public void add(BusinessDTO businessDTO) {
+    public void add(BusinessDTO businessDTO) throws Exception {
         businessService.add(businessDTO);
     }
 

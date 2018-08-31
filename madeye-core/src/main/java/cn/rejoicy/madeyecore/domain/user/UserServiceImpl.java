@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
 
         User userCreate = new User();
         userCreate.setUserName(userName);
-        userCreate.setUserCode(UUID.randomUUID().toString());
+        userCreate.setUserCode(UUID.randomUUID().toString().replace("-", ""));
         userCreate.setPassword(password);
 
         userRepository.save(userCreate);
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
             throw new Exception("用户信息不存在");
         }
 
-        if (!newPassword.equals(user.getPassword())) {
+        if (!password.equals(user.getPassword())) {
             throw new Exception("密码验证失败");
         }
         user.setPassword(newPassword);
@@ -85,5 +85,10 @@ public class UserServiceImpl implements UserService {
         }
 
         userRepository.delete(userCode);
+    }
+
+    @Override
+    public User findByUserName(String userName) {
+        return userRepository.findByUserName(userName);
     }
 }

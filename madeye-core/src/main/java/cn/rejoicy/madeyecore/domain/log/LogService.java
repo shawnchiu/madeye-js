@@ -27,7 +27,7 @@ public interface LogService {
      * @param logCode
      * @return
      */
-    Log delete(String logCode);
+    void delete(String logCode);
 
     /**
      * 条件查询

@@ -1,5 +1,6 @@
 package cn.rejoicy.madeyecore.domain.business;
 
+import cn.rejoicy.madeyecore.domain.business.entity.Business;
 import cn.rejoicy.madeyecore.domain.business.enums.BusinessStatusEnum;
 import cn.rejoicy.madeyecore.viewmodel.BusinessDTO;
 
@@ -14,7 +15,7 @@ public interface BusinessService {
      *
      * @param businessDTO
      */
-    void add(BusinessDTO businessDTO);
+    void add(BusinessDTO businessDTO) throws Exception;
 
     /**
      * 修改业务状态
@@ -22,7 +23,7 @@ public interface BusinessService {
      * @param businessCode
      * @param status
      */
-    void updateStatus(String businessCode, BusinessStatusEnum status);
+    void updateStatus(String businessCode, BusinessStatusEnum status) throws Exception;
 
     /**
      * 删除业务
@@ -30,4 +31,11 @@ public interface BusinessService {
      * @param businessCode
      */
     void delete(String businessCode);
+
+    /**
+     * 根据apiToken查询
+     * @param apiToken
+     * @return
+     */
+    Business findByApiToken(String apiToken);
 }

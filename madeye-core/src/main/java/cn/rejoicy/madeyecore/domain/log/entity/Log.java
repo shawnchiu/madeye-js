@@ -3,8 +3,10 @@ package cn.rejoicy.madeyecore.domain.log.entity;
 import cn.rejoicy.madeyecore.base.entity.BaseEntity;
 import cn.rejoicy.madeyecore.domain.business.entity.Business;
 import cn.rejoicy.madeyecore.domain.log.enums.LogLevelEnum;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 /**
  * @author shawnchiu
@@ -22,7 +24,7 @@ public class Log extends BaseEntity {
     /**
      * 日志编码
      */
-    @Column(length = 32)
+    @Column(length = 32, unique = true, updatable = false)
     private String logCode;
 
     /**
@@ -34,7 +36,8 @@ public class Log extends BaseEntity {
     /**
      * 所属业务
      */
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="businessCode")
     private Business business;
 
     /**
@@ -165,5 +168,13 @@ public class Log extends BaseEntity {
 
     public void setHeaderStr(String headerStr) {
         this.headerStr = headerStr;
+    }
+
+    @Override
+    public void preUpdate() {
+        if(StringUtils.isEmpty(logCode)){
+            logCode = UUID.randomUUID().toString().replace("-", "");
+        }
+        super.preUpdate();
     }
 }

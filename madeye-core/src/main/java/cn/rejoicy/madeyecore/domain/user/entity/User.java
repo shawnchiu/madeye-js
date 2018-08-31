@@ -3,8 +3,10 @@ package cn.rejoicy.madeyecore.domain.user.entity;
 import cn.rejoicy.madeyecore.base.entity.BaseEntity;
 import cn.rejoicy.madeyecore.domain.user.enums.UserTypeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 /**
  * 用户
@@ -31,7 +33,7 @@ public class User extends BaseEntity {
     /**
      * 用户编码
      */
-    @Column(length = 50, nullable = false, unique = true)
+    @Column(length = 32, unique = true, updatable = false)
     private String userCode;
 
     /**
@@ -43,13 +45,13 @@ public class User extends BaseEntity {
     /**
      * 手机号
      */
-    @Column(length = 20, nullable = false, unique = true)
+    @Column(length = 20, unique = true)
     private String phone;
 
     /**
      * 电子邮箱
      */
-    @Column(length = 50, nullable = false, unique = true)
+    @Column(length = 50, unique = true)
     private String email;
 
     /**
