@@ -1,6 +1,7 @@
 package cn.rejoicy.madeyejs.core.domain.log;
 
 import cn.rejoicy.madeyejs.core.base.conveter.LogConverter;
+import cn.rejoicy.madeyejs.core.domain.business.entity.Business;
 import cn.rejoicy.madeyejs.core.domain.log.entity.Log;
 import cn.rejoicy.madeyejs.core.infrastructure.log.LogRepository;
 import cn.rejoicy.madeyejs.core.viewmodel.ConditionQueryLogDTO;
@@ -27,9 +28,10 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public Log preCreate(LogDTO logDTO) {
+    public Log preCreate(LogDTO logDTO, Business business) {
         Log log = LogConverter.getLogDTOConveter().convert(logDTO);
         log.setLogCode(UUID.randomUUID().toString().replace("-", ""));
+        log.setBusiness(business);
         return log;
     }
 

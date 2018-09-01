@@ -1,6 +1,8 @@
 package cn.rejoicy.madeyejs.core.application.log;
 
 import cn.rejoicy.madeyejs.core.application.mq.Sender;
+import cn.rejoicy.madeyejs.core.domain.business.BusinessService;
+import cn.rejoicy.madeyejs.core.domain.business.entity.Business;
 import cn.rejoicy.madeyejs.core.domain.log.LogService;
 import cn.rejoicy.madeyejs.core.domain.log.entity.Log;
 import cn.rejoicy.madeyejs.core.viewmodel.LogDTO;
@@ -16,10 +18,13 @@ public class LogManager {
 
     private final Sender sender;
 
+    private final BusinessService businessService;
+
     @Autowired
-    public LogManager(LogService logService, Sender sender) {
+    public LogManager(LogService logService, Sender sender, BusinessService businessService) {
         this.logService = logService;
         this.sender = sender;
+        this.businessService = businessService;
     }
 
     /**
@@ -27,8 +32,16 @@ public class LogManager {
      *
      * @param logDTO
      */
-    public void create(LogDTO logDTO) {
-        Log log = logService.preCreate(logDTO);
+    public void create(LogDTO logDTO) throws Exception {
+        if (StringUtils.isEmpty(logDTO.getApiToken())) {
+            throw new Exception("apiToken is missing");
+        }
+        Business business = businessService.findByApiToken(logDTO.getApiToken());
+        if (business == null) {
+            throw new Exception("invalid apiToken ");
+        }
+
+        Log log = logService.preCreate(logDTO, business);
         // TODO: 2018/9/1 通过事件处理
         sender.sendLogCreateMessage(log);
     }

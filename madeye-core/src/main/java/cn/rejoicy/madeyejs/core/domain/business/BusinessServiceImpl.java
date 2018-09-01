@@ -83,7 +83,7 @@ public class BusinessServiceImpl implements BusinessService {
 
     @Override
     public Page<Business> findByCondition(ConditionQueryBusiness condition) {
-        Sort sort = new Sort(Sort.Direction.DESC, "_id");
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
         Pageable pageable = new PageRequest(condition.getPage() - 1, condition.getPageSize(), sort);
 
         return businessRepository.findByCondition((root, query, cb) -> getFullQueryPredicate(condition, root, cb), pageable);
@@ -93,12 +93,12 @@ public class BusinessServiceImpl implements BusinessService {
     private Predicate getFullQueryPredicate(ConditionQueryBusiness condition, Root<Business> root, CriteriaBuilder cb) {
         Predicate predicate = cb.conjunction();
         List<Expression<Boolean>> expressions = predicate.getExpressions();
-        SetJoin<Business, User> userJoin = root.joinSet("users", JoinType.LEFT);
 
         if (!StringUtils.isEmpty(condition.getBusinessName())) {
             expressions.add(cb.equal(root.<String>get("businessName"), condition.getBusinessName()));
         }
         if (!StringUtils.isEmpty(condition.getUserCode())) {
+            ListJoin<Business, User> userJoin = root.joinList("users", JoinType.LEFT);
             expressions.add(userJoin.get("userCode").in(condition.getUserCode()));
         }
 

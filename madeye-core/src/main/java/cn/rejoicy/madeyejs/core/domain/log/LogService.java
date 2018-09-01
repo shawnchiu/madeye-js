@@ -1,5 +1,6 @@
 package cn.rejoicy.madeyejs.core.domain.log;
 
+import cn.rejoicy.madeyejs.core.domain.business.entity.Business;
 import cn.rejoicy.madeyejs.core.domain.log.entity.Log;
 import cn.rejoicy.madeyejs.core.viewmodel.ConditionQueryLogDTO;
 import cn.rejoicy.madeyejs.core.viewmodel.LogDTO;
@@ -17,9 +18,10 @@ public interface LogService {
      * 预处理日志
      *
      * @param logDTO
+     * @param business
      * @return
      */
-    Log preCreate(LogDTO logDTO);
+    Log preCreate(LogDTO logDTO, Business business);
 
     /**
      * 创建日志
