@@ -1,8 +1,8 @@
 package cn.rejoicy.madeyecore;
 
-import cn.rejoicy.madeyecore.application.business.BusinessManager;
-import cn.rejoicy.madeyecore.domain.business.entity.Business;
-import cn.rejoicy.madeyecore.viewmodel.BusinessDTO;
+import cn.rejoicy.madeyejs.core.CoreApplication;
+import cn.rejoicy.madeyejs.core.application.business.BusinessManager;
+import cn.rejoicy.madeyejs.core.viewmodel.BusinessDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

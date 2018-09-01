@@ -1,7 +1,8 @@
 package cn.rejoicy.madeyecore;
 
-import cn.rejoicy.madeyecore.application.user.UserManager;
-import cn.rejoicy.madeyecore.viewmodel.UserDTO;
+import cn.rejoicy.madeyejs.core.CoreApplication;
+import cn.rejoicy.madeyejs.core.application.user.UserManager;
+import cn.rejoicy.madeyejs.core.viewmodel.UserDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
