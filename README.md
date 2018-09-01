@@ -6,6 +6,12 @@
 >madeye-client api接口  
 madeye-core 核心代码
 
+## madeye-js-web 后台管理页面
+>基于 element-ui 开发  
+webpack  
+nodejs  
+vue
+ 
 ## 环境要求
 >MySQL   
 REDIS  
