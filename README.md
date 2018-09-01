@@ -2,7 +2,7 @@
 
 >web前端报错监控的解决方案
 
-##madeye-js 后台服务  
+## madeye-js 后台服务  
 >madeye-client api接口  
 madeye-core 核心代码
 
