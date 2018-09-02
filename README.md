@@ -11,6 +11,8 @@ madeye-core 核心代码
 webpack  
 nodejs  
 vue
+
+## madeye-js-collector 异常采集模块
  
 ## 环境要求
 >MySQL   
