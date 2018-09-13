@@ -1,4 +1,4 @@
-package cn.rejoicy.madeyejs.core.application.mq;
+package cn.rejoicy.madeyejs.client.mq;
 
 import cn.rejoicy.madeyejs.core.domain.log.LogService;
 import cn.rejoicy.madeyejs.core.domain.log.entity.Log;
