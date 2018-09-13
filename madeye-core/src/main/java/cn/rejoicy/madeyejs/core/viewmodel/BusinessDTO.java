@@ -1,6 +1,11 @@
 package cn.rejoicy.madeyejs.core.viewmodel;
 
 import cn.rejoicy.madeyejs.core.domain.business.enums.BusinessStatusEnum;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 
 /**
  * @author shawnchiu
@@ -10,11 +15,34 @@ public class BusinessDTO {
 
     private String businessName;
 
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createTime;
+
+    private Long businessId;
+
     private String businessCode;
 
     private BusinessStatusEnum status;
 
     private String apiToken;
+
+    public Long getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(Long businessId) {
+        this.businessId = businessId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
     public String getBusinessName() {
         return businessName;

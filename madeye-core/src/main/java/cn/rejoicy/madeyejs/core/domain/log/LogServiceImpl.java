@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -32,6 +33,7 @@ public class LogServiceImpl implements LogService {
         Log log = LogConverter.getLogDTOConveter().convert(logDTO);
         log.setLogCode(UUID.randomUUID().toString().replace("-", ""));
         log.setBusiness(business);
+        log.setCreateTime(new Date());
         return log;
     }
 

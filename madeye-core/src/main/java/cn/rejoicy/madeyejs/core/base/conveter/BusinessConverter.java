@@ -20,6 +20,8 @@ public class BusinessConverter {
         return business -> {
             BusinessDTO businessDTO = new BusinessDTO();
             businessDTO.setBusinessName(business.getBusinessName());
+            businessDTO.setBusinessId(business.getId());
+            businessDTO.setCreateTime(business.getCreateTime());
             businessDTO.setBusinessCode(business.getBusinessCode());
             businessDTO.setStatus(business.getStatus());
             businessDTO.setApiToken(business.getApiToken());
