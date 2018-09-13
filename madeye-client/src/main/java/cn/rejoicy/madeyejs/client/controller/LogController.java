@@ -30,7 +30,7 @@ public class LogController {
      * @param logDTO
      * @return
      */
-    @RequestMapping(value = "create", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseResult addBusiness(@RequestBody LogDTO logDTO) {
         ResponseResult responseResult = new ResponseResult();
         try {
@@ -40,4 +40,6 @@ public class LogController {
         }
         return responseResult;
     }
+
+
 }

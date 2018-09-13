@@ -31,7 +31,7 @@ public class BusinessController {
      * @param businessDTO
      * @return
      */
-    @RequestMapping(value = "addBusiness", method = RequestMethod.POST)
+    @RequestMapping(value = "/addBusiness", method = RequestMethod.POST)
     public ResponseResult addBusiness(@RequestBody BusinessDTO businessDTO) {
         ResponseResult responseResult = new ResponseResult();
         try {
@@ -43,19 +43,16 @@ public class BusinessController {
     }
 
     /**
-     * 查询所有业务
+     * 根据条件查询业务
      *
-     * @param page
+     * @param condition
      * @return
      */
-    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
-    public ResponseResult findAll(@RequestParam int page, @RequestParam int pageSize) {
+    @RequestMapping(value = "/findByCondition", method = RequestMethod.POST)
+    public ResponseResult findByCondition(@RequestBody ConditionQueryBusiness condition) {
         ResponseResult responseResult = new ResponseResult();
         try {
-            ConditionQueryBusiness conditionQueryBusiness = new ConditionQueryBusiness();
-            conditionQueryBusiness.setPage(page);
-            conditionQueryBusiness.setPageSize(pageSize);
-            responseResult.setResult(businessManager.findByCondition(conditionQueryBusiness));
+            responseResult.setResult(businessManager.findByCondition(condition));
         } catch (Exception e) {
             responseResult.putException(e);
         }
