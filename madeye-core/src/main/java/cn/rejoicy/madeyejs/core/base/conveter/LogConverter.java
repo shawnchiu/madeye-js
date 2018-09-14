@@ -27,6 +27,8 @@ public class LogConverter {
             logDTO.setMessage(log.getMessage());
             logDTO.setUrl(log.getUrl());
             logDTO.setLevel(log.getLevel());
+            logDTO.setBrowser(log.getBrowser());
+            logDTO.setStatus(log.getStatus());
             return logDTO;
         };
     }
@@ -45,6 +47,8 @@ public class LogConverter {
             log.setMessage(logDTO.getMessage());
             log.setUrl(logDTO.getUrl());
             log.setLevel(logDTO.getLevel());
+            log.setBrowser(logDTO.getBrowser());
+            log.setStatus(logDTO.getStatus());
             return log;
         };
     }

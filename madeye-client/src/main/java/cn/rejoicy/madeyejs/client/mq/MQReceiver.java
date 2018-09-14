@@ -8,14 +8,18 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author shawn
+ */
 @Component
-public class Receiver {
+public class MQReceiver {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Receiver.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MQReceiver.class);
+
     private final LogService logService;
 
     @Autowired
-    public Receiver(LogService logService) {
+    public MQReceiver(LogService logService) {
         this.logService = logService;
     }
 
@@ -25,7 +29,6 @@ public class Receiver {
             return;
         }
         LOGGER.info("接受到新增日志消息： {}", log);
-
         logService.create(log);
     }
 }

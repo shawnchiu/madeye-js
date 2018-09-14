@@ -1,6 +1,10 @@
 package cn.rejoicy.madeyejs.core.infrastructure.log;
 
+import cn.rejoicy.madeyejs.core.domain.business.entity.Business;
 import cn.rejoicy.madeyejs.core.domain.log.entity.Log;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 
@@ -45,4 +49,9 @@ public interface LogRepository {
      * @return
      */
     Log findByLogCode(String logCode);
+
+    /**
+     * 条件查询
+     */
+    Page<Log> findByCondition(Specification<Log> specification, Pageable pageable);
 }

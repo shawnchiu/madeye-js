@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author shawnchiu
  * @date 2018/8/30
@@ -50,6 +52,11 @@ public class BusinessRepositoryImpl implements BusinessRepository {
     @Override
     public Page<Business> findByCondition(Specification<Business> specification, Pageable pageable) {
         return jpaBusinessRepository.findAll(specification, pageable);
+    }
+
+    @Override
+    public List<Business> findAll() {
+        return jpaBusinessRepository.findAll();
     }
 
 }

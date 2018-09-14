@@ -1,12 +1,15 @@
 package cn.rejoicy.madeyejs.core.application.log;
 
 import cn.rejoicy.madeyejs.core.application.mq.Sender;
+import cn.rejoicy.madeyejs.core.base.conveter.LogConverter;
 import cn.rejoicy.madeyejs.core.domain.business.BusinessService;
 import cn.rejoicy.madeyejs.core.domain.business.entity.Business;
 import cn.rejoicy.madeyejs.core.domain.log.LogService;
 import cn.rejoicy.madeyejs.core.domain.log.entity.Log;
+import cn.rejoicy.madeyejs.core.viewmodel.ConditionQueryLogDTO;
 import cn.rejoicy.madeyejs.core.viewmodel.LogDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -58,5 +61,10 @@ public class LogManager {
         }
 
         logService.delete(locCode);
+    }
+
+    public Page<LogDTO> findByCondition(ConditionQueryLogDTO condition) {
+        Page<Log> logPage =  logService.findByCondition(condition);
+        return logPage.map(LogConverter.getLogConverter());
     }
 }

@@ -6,6 +6,8 @@ import cn.rejoicy.madeyejs.core.viewmodel.BusinessDTO;
 import cn.rejoicy.madeyejs.core.viewmodel.ConditionQueryBusiness;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 /**
  * @author shawnchiu
  * @date 2018/8/30
@@ -49,4 +51,10 @@ public interface BusinessService {
      * @return
      */
     Page<Business> findByCondition(ConditionQueryBusiness condition);
+
+    /**
+     * 查询全部
+     * @return
+     */
+    List<Business> findAll();
 }

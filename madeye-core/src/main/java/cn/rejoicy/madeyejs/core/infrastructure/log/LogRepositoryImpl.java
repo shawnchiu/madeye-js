@@ -3,6 +3,9 @@ package cn.rejoicy.madeyejs.core.infrastructure.log;
 import cn.rejoicy.madeyejs.core.infrastructure.log.jpa.JpaLogRepository;
 import cn.rejoicy.madeyejs.core.domain.log.entity.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -40,5 +43,10 @@ public class LogRepositoryImpl implements LogRepository {
     @Override
     public Log findByLogCode(String logCode) {
         return jpaLogRepository.findOneByLogCode(logCode);
+    }
+
+    @Override
+    public Page<Log> findByCondition(Specification<Log> specification, Pageable pageable) {
+        return jpaLogRepository.findAll(specification,pageable);
     }
 }

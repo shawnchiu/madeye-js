@@ -77,10 +77,29 @@ public class Log extends BaseEntity {
     private String cookieStr;
 
     /**
+     * 浏览器
+     */
+    @Column(length = 100)
+    private String browser;
+
+    /**
      * 头信息
      */
     @Column(length = 1000)
     private String headerStr;
+
+    /**
+     * 错误码
+     */
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Long getId() {
         return id;
@@ -170,6 +189,14 @@ public class Log extends BaseEntity {
         this.headerStr = headerStr;
     }
 
+    public String getBrowser() {
+        return browser;
+    }
+
+    public void setBrowser(String browser) {
+        this.browser = browser;
+    }
+
     @Override
     public void preUpdate() {
         if(StringUtils.isEmpty(logCode)){
@@ -185,7 +212,9 @@ public class Log extends BaseEntity {
                 ", logCode='" + logCode + '\'' +
                 ", level=" + level +
                 ", business=" + business +
+                ", browser='" + browser  + '\'' +
                 ", env='" + env + '\'' +
+                ", status='" + status + '\'' +
                 ", message='" + message + '\'' +
                 ", url='" + url + '\'' +
                 ", page='" + page + '\'' +

@@ -89,6 +89,11 @@ public class BusinessServiceImpl implements BusinessService {
         return businessRepository.findByCondition((root, query, cb) -> getFullQueryPredicate(condition, root, cb), pageable);
     }
 
+    @Override
+    public List<Business> findAll() {
+        return businessRepository.findAll();
+    }
+
 
     private Predicate getFullQueryPredicate(ConditionQueryBusiness condition, Root<Business> root, CriteriaBuilder cb) {
         Predicate predicate = cb.conjunction();

@@ -6,8 +6,14 @@ import cn.rejoicy.madeyejs.core.domain.business.entity.Business;
 import cn.rejoicy.madeyejs.core.viewmodel.BusinessDTO;
 import cn.rejoicy.madeyejs.core.viewmodel.ConditionQueryBusiness;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.ConditionalGenericConverter;
+import org.springframework.core.convert.converter.ConverterFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class BusinessManager {
@@ -37,5 +43,24 @@ public class BusinessManager {
     public Page<BusinessDTO> findByCondition(ConditionQueryBusiness condition) {
         Page<Business> businesses = businessService.findByCondition(condition);
         return businesses.map(BusinessConverter.getBusinessConveter());
+    }
+
+    /**
+     * 根据Code删除
+     *
+     * @param businessCode
+     */
+    public void delete(String businessCode) {
+        businessService.delete(businessCode);
+    }
+
+    /**
+     * 查询全部
+     *
+     * @return
+     */
+    public List<BusinessDTO> findAll() {
+        List<Business> businesses = businessService.findAll();
+        return BusinessConverter.getBusinessListConveter().convert(businesses);
     }
 }

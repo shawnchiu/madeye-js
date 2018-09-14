@@ -43,6 +43,39 @@ public class BusinessController {
     }
 
     /**
+     * 查询所有
+     *
+     * @return
+     */
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
+    public ResponseResult findAll() {
+        ResponseResult responseResult = new ResponseResult();
+        try {
+            responseResult.setResult(businessManager.findAll());
+        } catch (Exception e) {
+            responseResult.putException(e);
+        }
+        return responseResult;
+    }
+
+    /**
+     * 删除业务
+     *
+     * @param businessCode
+     * @return
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public ResponseResult delete(@RequestParam String businessCode) {
+        ResponseResult responseResult = new ResponseResult();
+        try {
+            businessManager.delete(businessCode);
+        } catch (Exception e) {
+            responseResult.putException(e);
+        }
+        return responseResult;
+    }
+
+    /**
      * 根据条件查询业务
      *
      * @param condition

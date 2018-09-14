@@ -1,6 +1,9 @@
 package cn.rejoicy.madeyejs.core.infrastructure.log.jpa;
 
 import cn.rejoicy.madeyejs.core.domain.log.entity.Log;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -25,4 +28,13 @@ public interface JpaLogRepository extends JpaRepository<Log, Long> {
      * @return
      */
     Log findOneByLogCode(String logCode);
+
+    /**
+     * 条件查询
+     *
+     * @param specification
+     * @param pageable
+     * @return
+     */
+    Page<Log> findAll(Specification<Log> specification, Pageable pageable);
 }

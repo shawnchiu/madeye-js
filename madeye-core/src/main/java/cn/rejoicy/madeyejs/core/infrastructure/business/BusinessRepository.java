@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.List;
+
 /**
  * 业务模块基础设施
  *
@@ -62,4 +64,5 @@ public interface BusinessRepository {
      */
     Page<Business> findByCondition(Specification<Business> specification, Pageable pageable);
 
+    List<Business> findAll();
 }

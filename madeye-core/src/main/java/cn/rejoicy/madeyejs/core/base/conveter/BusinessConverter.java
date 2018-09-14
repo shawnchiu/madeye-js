@@ -2,7 +2,12 @@ package cn.rejoicy.madeyejs.core.base.conveter;
 
 import cn.rejoicy.madeyejs.core.domain.business.entity.Business;
 import cn.rejoicy.madeyejs.core.viewmodel.BusinessDTO;
+import org.springframework.core.convert.converter.ConditionalGenericConverter;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.core.convert.support.ConversionServiceFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author shawnchiu
@@ -26,6 +31,29 @@ public class BusinessConverter {
             businessDTO.setStatus(business.getStatus());
             businessDTO.setApiToken(business.getApiToken());
             return businessDTO;
+        };
+    }
+
+    /**
+     * from business 2 businessdto
+     *
+     * @return
+     */
+    public static Converter<List<Business>, List<BusinessDTO>> getBusinessListConveter() {
+
+        return businessList -> {
+            List<BusinessDTO> businessDTOList = new ArrayList<>();
+            for (Business business : businessList) {
+                BusinessDTO businessDTO = new BusinessDTO();
+                businessDTO.setBusinessName(business.getBusinessName());
+                businessDTO.setBusinessId(business.getId());
+                businessDTO.setCreateTime(business.getCreateTime());
+                businessDTO.setBusinessCode(business.getBusinessCode());
+                businessDTO.setStatus(business.getStatus());
+                businessDTO.setApiToken(business.getApiToken());
+                businessDTOList.add(businessDTO);
+            }
+            return businessDTOList;
         };
     }
 

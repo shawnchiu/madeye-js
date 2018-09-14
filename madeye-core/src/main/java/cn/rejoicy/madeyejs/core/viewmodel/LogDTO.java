@@ -15,6 +15,9 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LogDTO {
 
+    /**
+     * Code
+     */
     private String logCode;
 
     /**
@@ -62,6 +65,15 @@ public class LogDTO {
      */
     private String headerStr;
 
+    /**
+     * 浏览器
+     */
+    private String browser;
+
+    /**
+     * 错误码
+     */
+    private String status;
 
     /**
      * 创建时间
@@ -69,6 +81,14 @@ public class LogDTO {
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public LogLevelEnum getLevel() {
         return level;
@@ -156,5 +176,13 @@ public class LogDTO {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getBrowser() {
+        return browser;
+    }
+
+    public void setBrowser(String browser) {
+        this.browser = browser;
     }
 }
