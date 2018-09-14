@@ -1,7 +1,7 @@
 package cn.rejoicy.madeyejs.core.infrastructure;
 
 /**
- * Created by heyong on 2016/11/17.
+ * Created by qiuxiaoliang on 2018/9/14.
  */
 public final class _jpaPackage {
     _jpaPackage() {
