@@ -1,11 +1,13 @@
 package cn.rejoicy.madeyejs.core.viewmodel;
 
+import cn.rejoicy.madeyejs.core.domain.log.enums.LogLevelEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.boot.logging.LogLevel;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 日志查询条件1
@@ -30,9 +32,9 @@ public class ConditionQueryLogDTO {
     private Date endTime;
 
     /**
-     * 日志等级
+     * 级别
      */
-    private LogLevel level;
+    private List<LogLevelEnum> logLevel;
 
     /**
      * 环境
@@ -44,7 +46,7 @@ public class ConditionQueryLogDTO {
      */
     private String businessCode;
 
-    private int page =1;
+    private int page = 1;
 
     private int pageSize = 10;
 
@@ -88,12 +90,12 @@ public class ConditionQueryLogDTO {
         this.endTime = endTime;
     }
 
-    public LogLevel getLevel() {
-        return level;
+    public List<LogLevelEnum> getLogLevel() {
+        return logLevel;
     }
 
-    public void setLevel(LogLevel level) {
-        this.level = level;
+    public void setLogLevel(List<LogLevelEnum> logLevel) {
+        this.logLevel = logLevel;
     }
 
     public String getEnv() {

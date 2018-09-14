@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.*;
@@ -60,7 +61,7 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public Page<Log> findByCondition(ConditionQueryLogDTO condition) {
-        Sort sort = new Sort(Sort.Direction.DESC,"id");
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
         Pageable pageable = new PageRequest(condition.getPage() - 1, condition.getPageSize(), sort);
         return logRepository.findByCondition((root, query, cb) -> getFullQueryPredicate(condition, root, cb), pageable);
     }
@@ -73,8 +74,8 @@ public class LogServiceImpl implements LogService {
             Join<Log, Business> businessJoin = root.join(root.getModel().getSingularAttribute("business", Business.class), JoinType.LEFT);
             expressions.add(cb.equal(businessJoin.<String>get("businessCode"), condition.getBusinessCode()));
         }
-        if (condition.getLevel() != null) {
-            expressions.add(cb.equal(root.<LogLevelEnum>get("level"), condition.getLevel()));
+        if (!CollectionUtils.isEmpty(condition.getLogLevel())) {
+            expressions.add(root.get("level").in(condition.getLogLevel()));
         }
         if (condition.getStartTime() != null) {
             expressions.add(cb.greaterThanOrEqualTo(root.get("createTime"), condition.getStartTime()));
